@@ -1,5 +1,5 @@
 // src/widgets/header/ui/Header/Header.jsx
-
+"use client";
 import React from "react";
 import { AppBar, Toolbar, Typography, Box } from "@mui/material";
 import { ToggleThemeButton } from "@/features/toggle-theme"; // Feature import qilinmoqda
