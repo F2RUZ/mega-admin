@@ -1,21 +1,30 @@
 // src/shared/theme/ThemeProvider.jsx
-'use client'
-import React, { useState, useMemo, createContext } from "react";
+"use client";
 import { ThemeProvider as MuiThemeProvider, CssBaseline } from "@mui/material";
 import { lightTheme, darkTheme } from "./theme";
 
-// 1. Theme Context yaratish
+import React, { useState, useMemo, createContext, useEffect } from "react"; // useEffect qo'shildi
+
 export const ColorModeContext = createContext({ toggleColorMode: () => {} });
 
-// 2. Theme Provider komponenti
 export const ThemeProvider = ({ children }) => {
-  // Boshlang'ich holatni localStorage'dan olish mumkin, hozircha 'light'
-  const [mode, setMode] = useState("light");
+  // Boshlang'ich holatni localStorage'dan olish
+  const [mode, setMode] = useState(() => {
+    if (typeof window !== "undefined") {
+      return localStorage.getItem("themeMode") || "light";
+    }
+    return "light";
+  });
 
-  // Context qiymatini optimallashtirish
+  // Holat o'zgarganda localStorage ga yozish
+  useEffect(() => {
+    localStorage.setItem("themeMode", mode);
+  }, [mode]);
+
+  // ... colorMode context kodi o'zgarmadi
+
   const colorMode = useMemo(
     () => ({
-      // Theme ni o'zgartirish funksiyasi
       toggleColorMode: () => {
         setMode((prevMode) => (prevMode === "light" ? "dark" : "light"));
       },
@@ -23,7 +32,7 @@ export const ThemeProvider = ({ children }) => {
     []
   );
 
-  // Tanlangan mode ga qarab theme ni tanlash
+  // ... theme useMemo kodi o'zgarmadi
   const theme = useMemo(
     () => (mode === "light" ? lightTheme : darkTheme),
     [mode]
@@ -32,7 +41,6 @@ export const ThemeProvider = ({ children }) => {
   return (
     <ColorModeContext.Provider value={colorMode}>
       <MuiThemeProvider theme={theme}>
-        {/* MUI ning standart stilizatsiyasini o'rnatish (fon rangini berish) */}
         <CssBaseline />
         {children}
       </MuiThemeProvider>
