@@ -1,5 +1,5 @@
 // src/shared/theme/ThemeProvider.jsx
-
+'use client'
 import React, { useState, useMemo, createContext } from "react";
 import { ThemeProvider as MuiThemeProvider, CssBaseline } from "@mui/material";
 import { lightTheme, darkTheme } from "./theme";
