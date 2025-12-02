@@ -25,7 +25,7 @@ export const LangProvider = ({ children }) => {
 
   const contextValue = useMemo(
     () => ({
-      lang: lang || "uz", // Agar lang hali yuklanmagan bo'lsa, 'uz' deb taxmin qiladi
+      lang: lang || "uz", 
       setLang,
       availableLangs: ["uz", "ru", "en"],
       changeLang: (newLang) => {
@@ -36,7 +36,7 @@ export const LangProvider = ({ children }) => {
   );
 
   if (!isMounted) {
-    return null; // Yoki biror loading spinner qaytarish mumkin
+    return null; 
   }
 
   return (

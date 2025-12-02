@@ -1,4 +1,3 @@
-// src/widgets/mobile-header/ui/MobileHeader/MobileHeader.jsx
 "use client";
 
 import React, { useState } from "react";
@@ -27,11 +26,9 @@ export const MobileHeader = () => {
     setMobileOpen(!mobileOpen);
   };
 
-  // Temaga qarab ranglar va gradientni dinamik tanlash
   const isDarkMode = theme.palette.mode === "dark";
 
   const headerStyle = {
-    // Yangi talablar: Topdan 20px, yonlardan 20px va borderRadius
     position: "fixed",
     top: 20,
     left: 20,
@@ -55,14 +52,10 @@ export const MobileHeader = () => {
   return (
     <>
       <AppBar
-        // AppBar ni Box ichiga olamiz, yoki AppBar ni to'g'ridan-to'g'ri Box kabi stil beramiz
-        // AppBar o'zi Paper/Box ga asoslangan, shuning uchun stilda to'g'ridan-to'g'ri o'zgartirishlar kiritamiz
-
         position="static" // Joylashuvni ota Box dan boshqarish uchun static qoldiramiz
         sx={headerStyle} // Yangi dinamik stillarni qo'llash
       >
         <Toolbar sx={{ justifyContent: "space-between" }}>
-          {/* Logo */}
           <Typography
             variant="h6"
             component={Link}
@@ -76,10 +69,7 @@ export const MobileHeader = () => {
             {t("app.title").split(" ")[0]}
           </Typography>
 
-          {/* Switcherlar va Menu Button */}
           <Box sx={{ display: "flex", gap: 1, alignItems: "center" }}>
-            {/* LanguageSwitcher va ToggleThemeButton o'z rangini avtomatik to'g'rilashi kerak, 
-               chunki ular ColorModeContext'dan foydalanadi. */}
             <LanguageSwitcher />
             <ToggleThemeButton />
 
@@ -96,8 +86,6 @@ export const MobileHeader = () => {
       </AppBar>
       <MobileDrawer open={mobileOpen} onClose={handleDrawerToggle} />
 
-      {/* AppBar position fixed bo'lgani uchun, u qoplab qo'ygan joyni bo'sh qoldirish uchun
-         alohida Toolbar qo'shiladi (faqat mobil rejimda) */}
       <Toolbar sx={{ display: { xs: "block", md: "none" } }} />
     </>
   );
